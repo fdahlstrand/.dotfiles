@@ -18,7 +18,6 @@ if ! [ -x "$(command -v git)" ]; then
     nix-env -iA git
 fi
 
-if ! [ -d "./.git" ]; then
-    git clone git@github.com:fdahlstrand/.dotfiles.git tmp
-    mv tmp/* tmp/.* .
+if ! [ -d "$HOME/.dotfiles" ]; then
+    git clone git@github.com:fdahlstrand/.dotfiles.git $HOME/.dotfiles
 fi
