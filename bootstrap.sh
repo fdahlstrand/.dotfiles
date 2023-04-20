@@ -15,9 +15,13 @@ then
 fi
 
 if ! [ -x "$(command -v git)" ]; then
-    nix-env -iA git
+    nix-env -iA nixpkgs.git
 fi
 
 if ! [ -d "$HOME/.dotfiles" ]; then
     git clone git@github.com:fdahlstrand/.dotfiles.git $HOME/.dotfiles
+fi
+
+if ! [ -x "$(command -v stow)" ]; then
+    nix-env -iA nixpkgs.stow
 fi
