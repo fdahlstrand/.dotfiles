@@ -1,5 +1,11 @@
 #!/bin/sh
 
+ensure_nix_package() {
+    if ! [ -x "$(command -v ${1})" ]; then
+        nix-env -iA ${3-nixpkgs}.${2-${1}}
+    fi
+}
+
 if ! [ -x "$(command -v nix-env)" ] 
 then
     if [ -x "$(command -v curl)" ]
@@ -14,14 +20,10 @@ then
     fi
 fi
 
-if ! [ -x "$(command -v git)" ]; then
-    nix-env -iA nixpkgs.git
-fi
+ensure_nix_package git
 
 if ! [ -d "$HOME/.dotfiles" ]; then
     git clone git@github.com:fdahlstrand/.dotfiles.git $HOME/.dotfiles
 fi
 
-if ! [ -x "$(command -v stow)" ]; then
-    nix-env -iA nixpkgs.stow
-fi
+ensure_nix_package stow
