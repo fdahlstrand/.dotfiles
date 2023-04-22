@@ -31,6 +31,8 @@ if [ "$(nix-env -q | grep glibc-locales)" = "" ]; then
 fi
 ensure_nix_package stow
 
+ensure_nix_package oh-my-posh
+
 ensure_nix_package zsh
 if [ "$(grep $(command -v zsh) /etc/shells)" = "" ]; then
     echo $(command -v zsh) | sudo tee -a /etc/shells > /dev/null
