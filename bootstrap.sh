@@ -43,4 +43,8 @@ if [ "$(awk -F: -v user="$USER" '$1 == user {print $NF}' /etc/passwd)" != "$(com
     chsh -s $(command -v zsh)
 fi
 
+if ! [ -d $HOME/.zsh-plugins/zsh-vi-mode ]; then
+    git clone https://github.com/jeffreytse/zsh-vi-mode.git $HOME/.zsh-plugins/zsh-vi-mode
+fi
+
 stow -Svt $HOME zsh
