@@ -11,7 +11,7 @@ then
     if [ -x "$(command -v curl)" ]
     then
         curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
-    elif [ -x "$(command -v xwget)" ]
+    elif [ -x "$(command -v wget)" ]
     then
         wget -qO- https://nixos.org/nix/install | sh -s -- --no-daemon
     else
@@ -23,7 +23,7 @@ fi
 ensure_nix_package git
 
 if ! [ -d "$HOME/.dotfiles" ]; then
-    git clone git@github.com:fdahlstrand/.dotfiles.git $HOME/.dotfiles
+    git clone https://github.com/fdahlstrand/.dotfiles.git $HOME/.dotfiles
 fi
 
 if [ "$(nix-env -q | grep glibc-locales)" = "" ]; then
@@ -48,3 +48,9 @@ if ! [ -d $HOME/.zsh-plugins/zsh-vi-mode ]; then
 fi
 
 stow -Svt $HOME zsh
+
+ensure_nix_package nvim neovim
+ensure_nix_package rg ripgrep
+ensure_nix_package fd
+ensure_nix_package fzf
+ensure_nix_package tmux

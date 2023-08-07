@@ -29,3 +29,4 @@ export LC_IDENTIFICATION="en_US.UTF-8"
 export HISTFILE="$HOME/.zhistory"
 export HISTSIZE=10000
 export SAVEHIST=10000
+. "$HOME/.cargo/env"
