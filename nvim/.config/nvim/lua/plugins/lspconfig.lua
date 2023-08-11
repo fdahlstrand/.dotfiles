@@ -33,6 +33,8 @@ return {
         vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
       end
       nmap("K", vim.lsp.buf.hover, 'Hover Documentation')
+      nmap("<leader>ca", vim.lsp.buf.code_action, 'Code Action')
+      nmap("<leader>rn", vim.lsp.buf.rename, 'Rename')
 
       if client.supports_method("textDocument/formatting") then
         vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
