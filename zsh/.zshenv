@@ -8,9 +8,9 @@ export VISUAL="nvim"
 
 if [ -e /home/fredrikd/.nix-profile/etc/profile.d/nix.sh ]; then 
     . /home/fredrikd/.nix-profile/etc/profile.d/nix.sh; 
+    export LOCALE_ARCHIVE=$(nix-env --installed --no-name --out-path --query glibc-locales)/lib/locale/locale-archive
 fi 
 
-export LOCALE_ARCHIVE=$(nix-env --installed --no-name --out-path --query glibc-locales)/lib/locale/locale-archive
 export LANG=en_US.UTF-8
 export LANGUAGE=$LANG
 export LC_CTYPE="en_US.UTF-8"
