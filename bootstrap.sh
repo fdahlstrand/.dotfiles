@@ -54,3 +54,4 @@ ensure_nix_package rg ripgrep
 ensure_nix_package fd
 ensure_nix_package fzf
 ensure_nix_package tmux
+ensure_nix_package unzip
