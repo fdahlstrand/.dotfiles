@@ -3,8 +3,8 @@ return {
   config = function(_, opts)
     require("rainbow-delimiters.setup").setup {
       strategy = {
-        [''] = rainbow_delimiters.strategy['global'],
-        vim = rainbow_delimiters.strategy['local'],
+        [''] = require('rainbow-delimiters').strategy['global'],
+        vim = require('rainbow-delimiters').strategy['local'],
       },
       query = {
         [''] = 'rainbow-delimiters',
