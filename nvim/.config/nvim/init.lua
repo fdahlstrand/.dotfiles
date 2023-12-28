@@ -14,7 +14,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  concurrency = 2
+})
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
