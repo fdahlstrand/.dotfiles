@@ -35,6 +35,8 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 vim.o.colorcolumn = "78"
+vim.o.splitright = true
+vim.o.splitbelow = true
 
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic message" })
