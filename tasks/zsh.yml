@@ -1,0 +1,18 @@
+- name: Install zsh
+  become: true
+  apt:
+    name: zsh
+- name: Stow zsh configuration files
+  shell: "stow --dir {{ lookup('env', 'HOME') }}/.dotfiles --target {{ lookup('env', 'HOME') }} zsh"
+- name: Change user shell to zsh
+  become: true
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    shell: /bin/zsh
+- name: Install oh-my-posh
+  become: true
+  shell: "curl -s https://ohmyposh.dev/install.sh | bash -s -- -t {{ lookup('env', 'HOME' )}}/.cache/oh-my-posh/themes"
+- name: Install zsh vi-mode
+  ansible.builtin.git:
+    repo: https://github.com/jeffreytse/zsh-vi-mode.git
+    dest: "{{ lookup('env', 'HOME') }}/.zsh-plugins/zsh-vi-mode"

@@ -1,0 +1,15 @@
+---
+  - name: "Setting up Personal Development Environment"
+    hosts: localhost
+    become: false
+    tasks:
+      - name: Create config directory
+        ansible.builtin.file:
+          path: "{{ lookup('env', 'HOME') }}/.config"
+          state: directory
+      - import_tasks: tasks/git.yml
+      - import_tasks: tasks/dotfiles.yml
+      - import_tasks: tasks/neovim.yml
+      - import_tasks: tasks/zsh.yml
+      - import_tasks: tasks/tmux.yml
+      - import_tasks: tasks/utils.yml

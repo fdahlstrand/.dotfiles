@@ -1,0 +1,10 @@
+- name: Install tmux
+  become: true
+  apt:
+    name: tmux
+- name: Stow tmux configuration
+  shell: "stow --dir {{ lookup('env', 'HOME') }}/.dotfiles --target {{ lookup('env', 'HOME') }} tmux"
+- name: Setup Tmux Plugin Manager
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
