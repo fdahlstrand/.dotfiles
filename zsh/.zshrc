@@ -3,6 +3,8 @@ unsetopt BEEP
 ZVM_INIT_MODE=sourcing
 source $HOME/.zsh-plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
+autoload -Uz compinit && compinit
+
 if [ -n "${commands[fzf-share]}" ]; then
 	source "$(fzf-share)/key-bindings.zsh"
 	source "$(fzf-share)/completion.zsh"
