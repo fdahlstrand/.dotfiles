@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-sudo apt update
-sudo apt dist-upgrade
+apt update
+apt dist-upgrade
 
-sudo apt-add-repository --yes --update ppa:ansible/absible
-sudo apt install ansible
+apt install software-properties-common
+
+apt-add-repository --yes --update ppa:ansible/ansible
+apt install ansible
