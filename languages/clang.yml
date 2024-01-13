@@ -1,0 +1,13 @@
+---
+  - hosts: localhost
+    name: Install Clang
+    pre_tasks: 
+      - name: Install Clang pre-requisties
+        become: true
+        apt:
+          name: ["lsb-release", "wget", "software-properties-common", "gnupg"]
+          update_cache: true
+    tasks:
+      - name: Download and execute install script
+        become: true
+        shell: 'echo -ne ''\n'' | bash -c "$(curl https://apt.llvm.org/llvm.sh)"'
