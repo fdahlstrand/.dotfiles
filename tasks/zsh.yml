@@ -18,5 +18,5 @@
     dest: "{{ lookup('env', 'HOME') }}/.zsh-plugins/zsh-vi-mode"
 - name: Install zsh syntax-highlighting
   ansible.builtin.git:
-    repo: https://github.com/jeffreytse/zsh-vi-mode.git
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
     dest: "{{ lookup('env', 'HOME') }}/.zsh-plugins/zsh-syntax-highlighting"
