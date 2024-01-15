@@ -20,3 +20,7 @@
   become: true
   apt:
     name: unzip
+- name: Install g++
+  become: true
+  apt:
+    name: g++
