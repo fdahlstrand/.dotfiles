@@ -1,9 +1,15 @@
 unsetopt BEEP
 
 ZVM_INIT_MODE=sourcing
-source $HOME/.zsh-plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
 autoload -Uz compinit && compinit
+
+if [ -e $HOME/.zsh-plugins/zsh-vi-mode ]; then
+	source $HOME/.zsh-plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+fi
+
+if [ -e $HOME/.zsh-plugins/zsh-autosuggestions ]; then
+	source $HOME/.zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 if [ -n "${commands[fzf-share]}" ]; then
 	source "$(fzf-share)/key-bindings.zsh"
@@ -22,4 +28,6 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-source $HOME/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -e $HOME/.zsh-plugins/zsh-syntax-highlighting ]; then
+	source $HOME/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
