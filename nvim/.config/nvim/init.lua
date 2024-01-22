@@ -18,9 +18,6 @@ require("lazy").setup("plugins", {
   concurrency = 2
 })
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 vim.o.hlsearch = false
 vim.o.number = true
 vim.o.relativenumber = true
