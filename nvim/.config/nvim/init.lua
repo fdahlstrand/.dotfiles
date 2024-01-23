@@ -18,6 +18,8 @@ require("lazy").setup("plugins", {
   concurrency = 2
 })
 
+require('gtd')
+
 vim.o.hlsearch = false
 vim.o.number = true
 vim.o.relativenumber = true
