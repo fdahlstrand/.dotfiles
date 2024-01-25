@@ -6,6 +6,7 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
   },
   config = function()
     local cmp = require 'cmp'
@@ -17,6 +18,10 @@ return {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end
+      },
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
       },
       mapping = {
         ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -51,6 +56,7 @@ return {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'orgmode' },
+        { name = 'nvim_lsp_signature_help' },
         { name = 'buffer' },
         { name = 'path' }
       }
