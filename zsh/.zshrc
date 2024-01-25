@@ -22,6 +22,10 @@ else
 	eval "$(oh-my-posh init zsh --config $HOME/.cache/oh-my-posh/themes/tokyonight_storm.omp.json)"
 fi
 
+if [ -e /usr/local/go ]; then
+	export PATH=$PATH:/usr/local/go/bin
+fi
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export NVM_DIR="$HOME/.config/nvm"
@@ -31,3 +35,4 @@ export NVM_DIR="$HOME/.config/nvm"
 if [ -e $HOME/.zsh-plugins/zsh-syntax-highlighting ]; then
 	source $HOME/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+

@@ -1,0 +1,40 @@
+
+---
+  - hosts: localhost
+    name: Install Golang
+    vars:
+      go_package_name: go1.21.6.linux-amd64.tar.gz
+      checksum: sha256:3f934f40ac360b9c01f616a9aa1796d227d8b0328bf64cb045c7b8c4ee9caea4
+      download_path: "https://go.dev/dl/{{ go_package_name }}"
+      tmp_path: "/tmp/{{ go_package_name }}"
+      install_path: "/usr/local"
+
+    tasks:
+      - name: Remove existing Go release
+        become: true
+        file: 
+          path: "{{ install_path }}/go"
+          state: absent
+
+      - name: Download Go release
+        ansible.builtin.get_url:
+          url: "{{ download_path }}"
+          dest: "{{ tmp_path }}"
+          checksum: "{{ checksum }}"
+
+      - name: Create Destination Directory
+        become: true
+        file:
+          path: "{{ install_path }}/go"
+          state: directory
+
+      - name: Extract Go
+        become: true
+        ansible.builtin.unarchive:
+          src: "{{ tmp_path }}"
+          dest: "{{ install_path }}"
+
+      - name: Remove installation Package
+        file:
+          path: "{{ tmp_path }}"
+          state: absent
