@@ -37,7 +37,12 @@ vim.o.colorcolumn = "78"
 vim.o.splitright = true
 vim.o.splitbelow = true
 
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic message" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, { desc = "Goto next diagnostic message" })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" })
