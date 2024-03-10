@@ -5,4 +5,5 @@ return {
   'tpope/vim-repeat',
   'dhruvasagar/vim-table-mode',
   'mbbill/undotree',
+  'tpope/vim-commentary'
 }
