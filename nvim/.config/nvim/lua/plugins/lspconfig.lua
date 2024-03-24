@@ -85,18 +85,18 @@ return {
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
       vim.lsp.handlers.hover, {
-        border = "rounded"
+        border = "single"
       }
     )
 
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
       vim.lsp.handlers.signature_help, {
-        border = "rounded"
+        border = "single"
       }
     )
 
     vim.diagnostic.config {
-      float = { border = "rounded" }
+      float = { border = "single" }
     }
 
     require('neodev').setup()

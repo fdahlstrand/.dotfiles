@@ -9,6 +9,7 @@ return {
     config = function()
       require('telescope').setup {
         defaults = {
+          borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
           mappings = {
             i = {
               ['<C-u>'] = false,
