@@ -1,27 +1,33 @@
 - name: Install Neovim prerequisites
   become: true
+  tags: neovim
   apt:
     name: ["ninja-build", "gettext", "cmake", "unzip", "curl", "git"]
 - name: Clone Neovim
+  tags: neovim
   ansible.builtin.git:
     repo: https://github.com/neovim/neovim.git
     dest: "{{ lookup('env', 'HOME') }}/repos/neovim"
-    version: v0.9.5
+    version: v0.10.2
     force: true
 - name: Build Neovim
+  tags: neovim
   community.general.make:
     chdir: "{{ lookup('env', 'HOME') }}/repos/neovim"
     make: make
     params:
       CMAKE_BUILD_TYPE=Release
 - name: Install Neovim
+  tags: neovim
   become: true
   community.general.make:
     chdir: "{{ lookup('env', 'HOME') }}/repos/neovim"
     make: make
     target: install
 - name: Fix permissions after Neovim installation
+  tags: neovim
   become: true
   file: "dest={{ lookup('env', 'HOME') }}/repos/neovim owner={{ lookup('env', 'USER') }} group={{ lookup('env', 'USER') }} recurse=yes"
 - name: Stow Neovim configuration files
+  tags: neovim
   shell: "stow --dir {{ lookup('env', 'HOME') }}/.dotfiles --target {{ lookup('env', 'HOME') }} nvim"
