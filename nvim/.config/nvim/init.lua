@@ -30,7 +30,7 @@ vim.o.swapfile = false
 vim.o.signcolumn = 'yes'
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menuone,noselect,preview'
 vim.o.termguicolors = true
 vim.o.colorcolumn = "78"
 vim.o.splitright = true
@@ -86,6 +86,8 @@ vim.keymap.set('v', '<leader>y', "\"+y", { desc = "Copy selected line into syste
 vim.keymap.set('n', '<leader>p', "\"+p", { desc = "Paste contents from system clipboard after cursor" })
 vim.keymap.set('n', '<leader>P', "\"+P", { desc = "Paste contents from system clipboard before cursor" })
 vim.keymap.set('v', '<leader>p', "\"+p", { desc = "Replace selected text with contents from system clipboard" })
+
+vim.cmd([[autocmd FileType nim setlocal commentstring=#\ %s]])
 
 vim.cmd([[colorscheme tokyonight-night]])
 local colors = require("tokyonight.colors").setup()

@@ -36,3 +36,6 @@ if [ -e $HOME/.zsh-plugins/zsh-syntax-highlighting ]; then
 	source $HOME/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+if [ -e $HOME/.nimble/bin ]; then
+	export PATH=/home/fredrikd/.nimble/bin:$PATH
+fi

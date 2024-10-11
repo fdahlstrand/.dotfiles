@@ -4,7 +4,8 @@ return {
     require('conform').setup({
       formatters_by_ft = {
         python = { "isort", "black" },
-        go = { "gofumpt", "goimports-reviser", "golines" }
+        go = { "gofumpt", "goimports-reviser", "golines" },
+        nim = { "nimpretty" }
       },
       format_on_save = {
         timeout_ms = 500,
