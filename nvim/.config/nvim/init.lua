@@ -23,7 +23,6 @@ require('gtd')
 vim.o.hlsearch = false
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.clipboard = 'unnamedplus'
 vim.o.breakindent = true
 vim.o.undofile = true
 vim.o.backup = false
@@ -49,3 +48,45 @@ vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = "Toggle Undotr
 
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
+
+local function is_wsl()
+  local f = io.open("/proc/version", "r")
+  local content = ""
+
+  if f ~= nil then
+    content = f:read("*a")
+    io.close()
+  end
+
+  return string.match(content, "microsoft")
+end
+
+if is_wsl() then
+  -- This is very slow, do not use together with vim.o.clipboard = unnamedplus
+  vim.g.clipboard = {
+    name = 'WslClipboard',
+    copy = {
+      ['+'] = '/mnt/c/Windows/System32/clip.exe',
+      ['*'] = '/mnt/c/Windows/System32/clip.exe',
+    },
+    paste = {
+      ['+'] =
+      '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['*'] =
+      '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+  }
+else
+  vim.g.clipboard = 'unnamedplus'
+end
+vim.keymap.set('n', '<leader>yy', "\"+yy", { desc = "Copy current line into system clipboard" })
+vim.keymap.set('v', '<leader>y', "\"+y", { desc = "Copy selected line into system clipboard" })
+vim.keymap.set('n', '<leader>p', "\"+p", { desc = "Paste contents from system clipboard after cursor" })
+vim.keymap.set('n', '<leader>P', "\"+P", { desc = "Paste contents from system clipboard before cursor" })
+vim.keymap.set('v', '<leader>p', "\"+p", { desc = "Replace selected text with contents from system clipboard" })
+
+vim.cmd([[colorscheme tokyonight-night]])
+local colors = require("tokyonight.colors").setup()
+vim.cmd([[highlight ColorColumn guibg=]] .. colors.bg_highlight)
