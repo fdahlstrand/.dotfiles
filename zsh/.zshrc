@@ -39,3 +39,7 @@ fi
 if [ -e $HOME/.nimble/bin ]; then
 	export PATH=/home/fredrikd/.nimble/bin:$PATH
 fi
+
+if [ -x "$(command -v opam)" ]; then
+	eval $(opam env)
+fi
