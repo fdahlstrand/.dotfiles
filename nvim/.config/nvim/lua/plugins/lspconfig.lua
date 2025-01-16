@@ -125,5 +125,10 @@ return {
       capabilities = capabilities,
       on_attach = on_attach
     }
+
+    require 'lspconfig'.ocamllsp.setup {
+      capabilities = capabilities,
+      on_attach = on_attach
+    }
   end
 }

@@ -5,6 +5,10 @@ return {
     indent = {
       char = '┊',
     },
+    scope = {
+      show_start = false,
+      show_end = false
+    },
     whitespace = {
       remove_blankline_trail = true,
     },
