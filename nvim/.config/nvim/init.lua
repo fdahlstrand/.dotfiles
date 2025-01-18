@@ -65,6 +65,7 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+  'christoomey/vim-tmux-navigator',
   {
     'folke/tokyonight.nvim',
     priority = 1000,
