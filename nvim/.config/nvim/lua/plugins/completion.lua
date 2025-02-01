@@ -10,6 +10,7 @@ return {
     'saadparwaiz1/cmp_luasnip',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
+    'onsails/lspkind.nvim',
   },
   config = function()
     vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
@@ -17,6 +18,7 @@ return {
 
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
+    local lspkind = require 'lspkind'
 
     luasnip.config.setup {}
 
@@ -56,9 +58,13 @@ return {
         { name = 'luasnip' },
         { name = 'path' },
       },
+      formatting = {
+        format = lspkind.cmp_format(),
+      },
       window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        completion = {
+          winhighlight = 'PmenuMatchSel:PmenuMatch',
+        },
       },
     }
   end,
