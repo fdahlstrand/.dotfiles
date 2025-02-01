@@ -43,3 +43,9 @@ fi
 if [ -x "$(command -v opam)" ]; then
 	eval $(opam env)
 fi
+
+if [ -e $HOME/dotnet ]; then
+	export DOTNET_ROOT=$HOME/dotnet
+	export PATH=$PATH:$HOME/dotnet:$HOME/.dotnet/tools
+	export DOTNET_CLI_TELEMETRY_OPTOUT=1
+fi
