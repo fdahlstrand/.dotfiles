@@ -35,6 +35,7 @@ vim.opt.inccommand = 'split'
 
 vim.opt.colorcolumn = '78'
 vim.opt.cursorline = true
+vim.opt.showmode = false
 
 vim.opt.scrolloff = 10
 
@@ -70,4 +71,3 @@ require('lazy').setup({
   },
   concurrency = 4,
 })
-
