@@ -51,9 +51,8 @@ return {
       })
 
       vim.api.nvim_create_autocmd('LspAttach', {
-        callback = function(args)
+        callback = function()
           local telescope = require 'telescope.builtin'
-          print('LspAttach-ing')
 
           vim.keymap.set('n', 'gd', telescope.lsp_definitions, { buffer = 0 })
           vim.keymap.set('n', 'gr', telescope.lsp_references, { buffer = 0 })
