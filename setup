@@ -1,5 +1,20 @@
 #!/usr/bin/env bash
 
+function get_distro() {
+	if [[ -f /etc/os-release ]]
+	then
+		source /etc/os-release
+		echo $ID
+	else
+		>&2 echo "Don't know how to determine distro."
+		exit 1
+	fi
+}
+
+WORKDIR=$(mktemp --directory)
+DISTRO=$(get_distro)
+ARCH=$(uname -i)
+
 case $1 in
 	rust)
 		if ! [ -x "$(command -v rustup)" ]; then
@@ -8,6 +23,22 @@ case $1 in
 		rustup self update
 		rustup update
 		;;
+
+	neovim)
+		case $DISTRO in
+			ubuntu)
+				sudo apt install --yes ninja-build gettext cmake unzip curl
+				;;
+			*)
+				>&2 echo "Don't know how to install prerquisites for neovim ($DISTRO)"
+				exit 1
+		esac
+		(cd $WORKDIR && git clone https://github.com/neovim/neovim)
+		(cd $WORKDIR/neovim && git checkout stable)
+		(cd $WORKDIR/neovim && make CMAKE_BUILD_TYPE=Release)
+		(cd $WORKDIR/neovim && sudo make install)
+		;;
+
 	*)
 		echo "Don't know how to setup '$1'"
 esac
