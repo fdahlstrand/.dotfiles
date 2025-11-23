@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+case $1 in
+	rust)
+		if ! [ -x "$(command -v rustup)" ]; then
+			curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+		fi
+		rustup self update
+		rustup update
+		;;
+	*)
+		echo "Don't know how to setup '$1'"
+esac
