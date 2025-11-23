@@ -11,9 +11,44 @@ function get_distro() {
 	fi
 }
 
-case $(get_distro) in
+WORKDIR=$(mktemp --directory)
+DISTRO=$(get_distro)
+ARCH=$(uname -i)
+
+echo "$DISTRO"
+echo "$ARCH"
+
+case $DISTRO in
 	ubuntu)
 		echo "Installing..."
+		sudo apt update --yes
+		sudo apt upgrade --yes
+
+		sudo apt install --yes git stow curl wget tar fzf fd-find
+
+		if ! [ -x "$(command -v rg)" ]; then
+			curl -output-dir $WORKDIR -LO https://github.com/BurntSushi/ripgrep/releases/download/14.1.1/ripgrep_14.1.1-1_amd64.deb
+			sudo dpkg -i $WORKDIR/ripgrep_14.1.1-1_amd64.deb
+		fi
+
+		if ! [ -x "$(command -v fd)" ]; then
+			ln -s $(command -v fdfind) $HOME/.local/bin/fd
+		fi
+
+		if ! [ -x "$(command -v zoxide)" ]; then
+			curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+		fi
+
+		if ! [ -x "$(command -v eza)" ]; then
+			echo "Not implemented ($WORKDIR)"
+			wget -c https://github.com/eza-community/eza/releases/latest/download/eza_$ARCH-unknown-linux-gnu.tar.gz -O $WORKDIR/eza.tar.gz
+			mkdir -p $WORKDIR/eza
+			tar xz -f $WORKDIR/eza.tar.gz -C $WORKDIR/eza
+			chmod +x $WORKDIR/eza/eza
+			mv $WORKDIR/eza/eza $HOME/.local/bin
+		fi
+
+		rm -r $WORKDIR
 		;;
 	*)
 		echo "Distro not supported"
