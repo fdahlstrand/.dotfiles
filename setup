@@ -38,7 +38,18 @@ case $1 in
 		(cd $WORKDIR/neovim && make CMAKE_BUILD_TYPE=Release)
 		(cd $WORKDIR/neovim && sudo make install)
 		;;
-
+	node)
+		if ! [ -n "$NVM_DIR" ]; then
+			curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+			source $HOME/.bashrc
+		fi
+		source $NVM_DIR/nvm.sh
+		nvm install --lts
+		nvm use --lts
+		npm install -g npm@latest
+		;;
 	*)
 		echo "Don't know how to setup '$1'"
 esac
+
+rm -rf $WORKDIR
