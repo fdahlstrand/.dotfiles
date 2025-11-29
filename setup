@@ -13,7 +13,7 @@ function get_distro() {
 
 WORKDIR=$(mktemp --directory)
 DISTRO=$(get_distro)
-ARCH=$(uname -i)
+ARCH=$(uname -m)
 
 case $1 in
 	rust)
@@ -26,7 +26,7 @@ case $1 in
 
 	neovim)
 		case $DISTRO in
-			ubuntu)
+			debian|ubuntu)
 				sudo apt install --yes ninja-build gettext cmake unzip curl
 				;;
 			*)

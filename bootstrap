@@ -13,21 +13,27 @@ function get_distro() {
 
 WORKDIR=$(mktemp --directory)
 DISTRO=$(get_distro)
-ARCH=$(uname -i)
+ARCH=$(uname -m)
 
 echo "$DISTRO"
 echo "$ARCH"
+echo "$WORKDIR"
 
 case $DISTRO in
-	ubuntu)
+	debian|ubuntu)
 		echo "Installing..."
 		sudo apt update --yes
 		sudo apt upgrade --yes
 
-		sudo apt install --yes git stow curl wget tar fzf fd-find
+		sudo apt install --yes git stow curl wget tar fd-find
+
+		if ! [ -x "$(command -v fzf)" ]; then
+			git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+			~/.fzf/install
+		fi
 
 		if ! [ -x "$(command -v rg)" ]; then
-			curl -output-dir $WORKDIR -LO https://github.com/BurntSushi/ripgrep/releases/download/14.1.1/ripgrep_14.1.1-1_amd64.deb
+			curl --output-dir "$WORKDIR" -LO "https://github.com/BurntSushi/ripgrep/releases/download/14.1.1/ripgrep_14.1.1-1_amd64.deb"
 			sudo dpkg -i $WORKDIR/ripgrep_14.1.1-1_amd64.deb
 		fi
 
