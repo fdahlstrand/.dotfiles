@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+GO_VERSION="1.25.4"
+
+curl --output-dir "$WORKDIR" -LO "https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz"
+if [ -d /usr/local/go ]; then
+	sudo rm -rf /usr/local/go
+fi
+sudo tar -C /usr/local -xzf "$WORKDIR/go$GO_VERSION.linux-amd64.tar.gz"
+
