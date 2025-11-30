@@ -25,7 +25,7 @@ case $DISTRO in
 		sudo apt update --yes
 		sudo apt upgrade --yes
 
-		sudo apt install --yes git stow curl wget tar fd-find
+		sudo apt install --yes git stow curl wget tar fd-find tmux
 
 		if ! [ -x "$(command -v fzf)" ]; then
 			git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
