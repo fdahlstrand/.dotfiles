@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+case $DISTRO in
+	debian|ubuntu)
+		sudo apt install --yes ninja-build gettext cmake unzip curl
+		;;
+	*)
+		>&2 echo "Don't know how to install prerquisites for neovim ($DISTRO)"
+		exit 1
+esac
+
+(cd $WORKDIR && git clone https://github.com/neovim/neovim)
+(cd $WORKDIR/neovim && git checkout stable)
+(cd $WORKDIR/neovim && make CMAKE_BUILD_TYPE=Release)
+(cd $WORKDIR/neovim && sudo make install)
+
+stow --dir=$HOME/.dotfiles/config --target=$HOME neovim

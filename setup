@@ -15,41 +15,14 @@ WORKDIR=$(mktemp --directory)
 DISTRO=$(get_distro)
 ARCH=$(uname -m)
 
-case $1 in
-	rust)
-		if ! [ -x "$(command -v rustup)" ]; then
-			curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-		fi
-		rustup self update
-		rustup update
-		;;
+export WORKDIR
+export DISTRO
+export ARCH
 
-	neovim)
-		case $DISTRO in
-			debian|ubuntu)
-				sudo apt install --yes ninja-build gettext cmake unzip curl
-				;;
-			*)
-				>&2 echo "Don't know how to install prerquisites for neovim ($DISTRO)"
-				exit 1
-		esac
-		(cd $WORKDIR && git clone https://github.com/neovim/neovim)
-		(cd $WORKDIR/neovim && git checkout stable)
-		(cd $WORKDIR/neovim && make CMAKE_BUILD_TYPE=Release)
-		(cd $WORKDIR/neovim && sudo make install)
-		;;
-	node)
-		if ! [ -n "$NVM_DIR" ]; then
-			curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-			source $HOME/.bashrc
-		fi
-		source $NVM_DIR/nvm.sh
-		nvm install --lts
-		nvm use --lts
-		npm install -g npm@latest
-		;;
-	*)
-		echo "Don't know how to setup '$1'"
-esac
+if [ -x script/$1 ]; then
+	script/$1
+else
+	echo "Don't know how to setup '$1'"
+fi
 
 rm -rf $WORKDIR
