@@ -20,6 +20,15 @@ echo "$ARCH"
 echo "$WORKDIR"
 
 case $DISTRO in
+	fedora)
+		echo "Installing..."
+		sudo dnf update --assumeyes
+		sudo dnf upgrade --assumeyes
+
+		sudo dnf install --assumeyes git stow curl wget tar tmux fd-find fzf ripgrep zoxide 
+
+		;;
+
 	debian|ubuntu)
 		echo "Installing..."
 		sudo apt update --yes

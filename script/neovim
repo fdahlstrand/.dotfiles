@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 case $DISTRO in
+	fedora)
+		sudo dnf install --assumeyes ninja-build cmake gcc make gettext curl glibc-gconv-extra git
+		;;
+
 	debian|ubuntu)
 		sudo apt install --yes ninja-build gettext cmake unzip curl
 		;;
@@ -14,4 +18,4 @@ esac
 (cd $WORKDIR/neovim && make CMAKE_BUILD_TYPE=Release)
 (cd $WORKDIR/neovim && sudo make install)
 
-stow --dir=$HOME/.dotfiles/config --target=$HOME neovim
+stow --dir=$HOME/.dotfiles/config --target=$HOME nvim
